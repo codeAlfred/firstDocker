@@ -1,0 +1,34 @@
+#CON ESTE ARCHIVO CREAREMOS UNA IMAGEN PARA QUE FUNCIONE MI PROYECTO
+# mi app necesita de node para q funcione
+FROM node:12
+#donde ira nuestro proyecto (container)
+WORKDIR /app
+#copiaremos nuestros archivos package al workdir
+COPY package*.json ./
+#ejecutar npm install para que intale las dependencias  de mi package.json
+RUN npm install
+# copiara todos nuestros archivos (a excepcion de node_modules) en nuestro container
+COPY . .
+#ejecutara el comando: npm start
+CMD ["npm", "start"]
+
+
+
+#para que todo esto funcione crearemos nuestra imagen con:
+    #docker build -t node-restapi .
+#listar todas los contenedores
+    #docker container ls
+#listar todas las imagenes
+    #docker image ls
+#ejecutar una imagen de manera interactiva(muestra por consola lo que sucede)
+    #docker run -it -p 4000:3000 node-restapi   
+#para listar los container ejecutandose
+    #docker ps
+#para listar los container ejecutados
+    #docker ps -a
+#para detener un container
+    #docker stop id_container
+#para eliminar todos los contenedores
+    #docker rm $(docker ps -aq) -f
+#para eliminar todos las imagenes
+    #docker rmi $(docker images -aq)
